@@ -9,7 +9,7 @@ import { ModalFirstLogin } from "../component/modal/modalFirstLogin";
 import { isFirstLogin } from "../network/api/axios.custom";
 
 const Contents = styled(template.Contents, {
-  height: `calc(${theme.NAV_LEFT_HEIGHT} - 100px -  6vh)`,
+  height: `calc(${theme.NAV_LEFT_HEIGHT} - 50px -  6vh)`,
   width: `50%`,
   marginLeft: `25%`,
   display: "flex",

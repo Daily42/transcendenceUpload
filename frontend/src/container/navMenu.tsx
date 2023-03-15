@@ -14,7 +14,7 @@ const NavMenu = styled("div", {
 });
 
 const DefaultIcon = styled("img", {
-  width: "10%",
+  width: "5%",
 });
 
 function Icon(props : any) {
