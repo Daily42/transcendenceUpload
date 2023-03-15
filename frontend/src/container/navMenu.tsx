@@ -4,17 +4,17 @@ import { useNavigate } from "react-router-dom";
 import * as theme from "../theme/theme";
 
 const NavMenu = styled("div", {
-  display: "flex",
-  minHeight: "50px",
-  height: `50px`,
-  justifyContent: "space-around",
-  alignItems: "center",
+  backgroundColor: "#000000",
+  minHeight: "40px",
+  height: `40px`,
   width: `100%`,
-  border: "1px solid white",
 });
 
 const DefaultIcon = styled("img", {
-  width: "5%",
+  position: "absolute",
+  maxHeight: "30px",
+  top: "5px",
+  height: "30px"
 });
 
 function Icon(props : any) {
@@ -33,19 +33,12 @@ function Icon(props : any) {
   );
 }
 
-const renderNavButtons = () => {
-  const navButtons: any = [];
-  navButtons.push(<Icon key={0} src="/asset/neon_icon_home.png" path="/daily" />);
-  navButtons.push(<Icon key={1} src="/asset/neon_icon_game.png" path="/daily" />);
-  navButtons.push(<Icon key={2} src="/asset/neon_icon_watch.png" path="/daily" />);
-  navButtons.push(<Icon key={3} src="/asset/neon_icon_chat.png" path="/daily" />);
-  return navButtons;
-};
-
 export function ContainerNavMenu() {
   return (
     <NavMenu className="navMenu">
-      {renderNavButtons()}
+	  <Icon src="/asset/icon_logo.png" style="left: 10px" path="/daily" />
+	  <Icon src="/asset/icon_logo.png" style="left: 500px" path="/daily" />
+	  {/* <Icon src="/asset/icon_logo.png" path="/daily" /> */}
     </NavMenu>
   );
 }
