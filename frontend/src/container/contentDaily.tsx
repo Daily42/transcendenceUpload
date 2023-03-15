@@ -9,7 +9,9 @@ import { ModalFirstLogin } from "../component/modal/modalFirstLogin";
 import { isFirstLogin } from "../network/api/axios.custom";
 
 const Contents = styled(template.Contents, {
-  height: `calc(${theme.NAV_LEFT_HEIGHT} - 6vh)`,
+  height: `calc(${theme.NAV_LEFT_HEIGHT} - 100px -  6vh)`,
+  width: `50%`,
+  marginLeft: `25%`,
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
@@ -81,7 +83,7 @@ export function ContainerContents() {
 
   return (
     <Contents className="contents">
-      <p>Hello WOrld!</p>
+      <p>Hello WOrld asd!</p>
     </Contents>
   );
 }

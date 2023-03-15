@@ -17,17 +17,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} />
         <Route path="/twofactor" element={<Twofactor />} />
-        <Route path="/auth/redirect" element={<RedirectTwofactor />} />
+        <Route path="/auth/redirect" element={<RedirectTwofactor />} /> */}
         <Route path="/Daily" element={<Daily />} />
-        <Route path="/home" element={<Home />} />
+        {/* <Route path="/home" element={<Home />} />
         <Route path="/game" element={<Game />} />
         <Route path="/watch" element={<Watch />} />
         <Route path="/profile/" element={<Profile />} />
         <Route path="/profile/:userSeq" element={<Profile />} />
         <Route path="/chat" element={<Chat />} />
-        <Route path="/*" element={<RootControl />} />
+        <Route path="/*" element={<RootControl />} /> */}
       </Routes>
     </BrowserRouter>
   );
