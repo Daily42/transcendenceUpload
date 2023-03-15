@@ -1,0 +1,23 @@
+version: '3'
+services:
+  gateway:
+    container_name: nginx_gateway
+    build: ./gateway_dev
+    ports:
+      - '80:80'
+  postgres:
+    #FIXME 추후에 환경변수를 받아 설정하도록 변경해야 함
+    container_name: postgres
+    image: postgres:latest
+    volumes:
+      - ./sql/:/docker-entrypoint-initdb.d/
+    environment:
+      DATABASE_HOST: localhost
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - '5432:5432'
+  adminer:
+    container_name: adminer
+    image: adminer:latest
