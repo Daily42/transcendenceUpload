@@ -17,8 +17,8 @@ const DefaultIcon = styled("img", {
   height: "30px"
 });
 
-function Icon(props : any) {
-  const { src, path } = props;
+function MenuButton(props : any) {
+  const { src, path, styled } = props;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -28,6 +28,7 @@ function Icon(props : any) {
   return (
     <DefaultIcon
       src={src}
+	  style={styled}
       onClick={handleClick}
     />
   );
@@ -36,9 +37,22 @@ function Icon(props : any) {
 export function ContainerNavMenu() {
   return (
     <NavMenu className="navMenu">
-	  <Icon src="/asset/icon_logo.png" style="left: 10px" path="/daily" />
-	  <Icon src="/asset/icon_logo.png" style="left: 500px" path="/daily" />
-	  {/* <Icon src="/asset/icon_logo.png" path="/daily" /> */}
+	  <MenuButton
+	  	styled={{
+		  left: "10px",
+		  cursor: "pointer"
+		}}
+		className="logo"
+		src="/asset/icon_logo.png"
+		path="/daily" />
+      <MenuButton
+	  	styled={{
+		  right: "10px",
+		  cursor: "pointer"
+		}}
+		className="login"
+		src="/asset/login_button.png"
+		path="/daily" />
     </NavMenu>
   );
 }

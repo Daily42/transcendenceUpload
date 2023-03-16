@@ -1,15 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { globalStyles } from "./theme/theme";
-import { Home } from "./view/viewHome";
 import { Daily } from "./view/viewDaily";
-import { Game } from "./view/viewGame";
-import { Chat } from "./view/viewChat";
-import { Profile } from "./view/viewProfile";
-import { Watch } from "./view/viewWatch";
-import { Login } from "./view/viewLogin";
-import { Twofactor } from "./view/viewTwofactor";
-import { RedirectTwofactor } from "./view/viewRedirect";
 import { RootControl } from "./component/rootControl";
 
 function App() {
