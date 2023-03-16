@@ -6,8 +6,8 @@ import * as theme from "../theme/theme";
 const NavMenu = styled("div", {
   backgroundColor: "#000000",
   minHeight: "40px",
-  height: `40px`,
-  width: `100%`,
+  height: "40px",
+  width: "100%",
 });
 
 const DefaultIcon = styled("img", {
@@ -28,7 +28,7 @@ function MenuButton(props : any) {
   return (
     <DefaultIcon
       src={src}
-	  style={styled}
+      style={styled}
       onClick={handleClick}
     />
   );
@@ -37,22 +37,24 @@ function MenuButton(props : any) {
 export function ContainerNavMenu() {
   return (
     <NavMenu className="navMenu">
-	  <MenuButton
-	  	styled={{
-		  left: "10px",
-		  cursor: "pointer"
-		}}
-		className="logo"
-		src="/asset/icon_logo.png"
-		path="/daily" />
       <MenuButton
-	  	styled={{
-		  right: "10px",
-		  cursor: "pointer"
-		}}
-		className="login"
-		src="/asset/login_button.png"
-		path="/daily" />
+        styled={{
+          left: "10px",
+          cursor: "pointer"
+        }}
+        className="logo"
+        src="/asset/icon_logo.png"
+        path="/daily"
+      />
+      <MenuButton
+        styled={{
+          right: "10px",
+          cursor: "pointer"
+        }}
+        className="login"
+        src="/asset/login_button.png"
+        path="/daily"
+      />
     </NavMenu>
   );
 }
