@@ -1,6 +1,7 @@
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from "react";
 import { styled } from "@stitches/react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import * as theme from "../theme/theme";
@@ -32,10 +33,77 @@ const Contents = styled("div", {
   },
 });
 
+/* 이벤트의 제목과 클리히면 해당 이벤트로 이동하는 노드 */
+const DefaultNode = styled("div", {
+  position: "absolute",
+  backgroundColor: "white",
+  height: "50px",
+  width: "100px",
+  cursor: "pointer",
+  /* 아래는 꼭짓점을 둥글게 만들기 위한 옵션 */
+  borderRadius: "10px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  "&:hover": {
+    opacity: 0.8,
+  }
+});
+
+function Notice(props : any) {
+  const { path, styled } = props;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(path);
+  };
+
+  return (
+    <DefaultNode
+	    style={styled}
+      onClick={handleClick}
+    />
+  );
+}
+
+/* 개포 */
+const DefaultGeopo = styled("div", {
+  position: "absolute",
+  backgroundColor: "gray",
+  height: `calc(${theme.NAV_LEFT_HEIGHT} - 100px)`,
+  width: `50%`,
+  cursor: "pointer",
+  /* 아래는 꼭짓점을 둥글게 만들기 위한 옵션 */
+  borderRadius: "10px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  "&:hover": {
+    opacity: 0.8,
+  }
+});
+
+function Geopo(props : any) {
+  const { path, styled } = props;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(path);
+  };
+
+  return (
+    <DefaultGeopo
+	    style={styled}
+      onClick={handleClick}
+    />
+  );
+}
+
 export function ContainerContents() {
   return (
     <Contents className="contents">
-      <p>Hello WOrld asd!</p>
+    <Geopo />
+    <Notice />
     </Contents>
   );
 }
