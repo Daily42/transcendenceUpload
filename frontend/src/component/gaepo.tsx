@@ -95,11 +95,10 @@ export function Gaepo() {
 
   useEffect(() => {
     getEventsList().then((response: any) => {
-      console.log("response: ", response);
+      // console.log("response: ", response);
       setEvents(response);
     });
   }, []);
-
 
   return (
     <Building

@@ -5,4 +5,5 @@ enum EventType {
   EV30 = "EV30", // hackerthon & conference
   EV40 = "EV40", // etc
 }
+
 export default EventType;
