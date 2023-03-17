@@ -1,12 +1,12 @@
 import { styled } from "@stitches/react";
 
-export const Date = styled("div", {
+export const Event = styled("div", {
   display: "block",
-  width: "40%",
-  fontSize: "16px",
+  fontSize: "10px",
+  margin: "5px",
+  marginLeft: "7px",
   fontWeight: "bolder !important",
   overflow: "scroll",
-  textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   "&::-webkit-scrollbar": {
     display: "none",

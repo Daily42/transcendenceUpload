@@ -1,5 +1,5 @@
 import * as axios from "./axios.instance";
-import DateType from "../../enum/dateType.enum";
+import DateType from "../../enum/eventType.enum";
 import PlaceType from "../../enum/placeType.enum";
 
 export const getEventsList = async () => {

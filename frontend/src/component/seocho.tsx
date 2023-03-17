@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import DateType from "../enum/dateType.enum"
+import DateType from "../enum/eventType.enum"
 import { Building } from "./building/building"
 import { BuildingName } from "./building/buildingName"
 import { Line } from "./line/line"

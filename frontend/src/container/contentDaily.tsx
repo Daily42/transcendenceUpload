@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
 import { styled } from "@stitches/react";
 import * as theme from "../theme/theme";
-import { isFirstLogin } from "../network/api/axios.custom";
-import { BuildingName } from "../component/building/buildingName"
 import { Gaepo } from "../component/gaepo";
 import { Seocho } from "../component/seocho";
+// import { BuildingName } from "../component/building/buildingName"
 
 const Contents = styled("div", {
-  // backgroundColor: "#F0F0F0",
   height: `calc(${theme.NAV_LEFT_HEIGHT} - 50px)`,
   width: "70%",
   marginLeft: "15%",
   display: "flex",
   flexDirection: "column",
-  alignItems: "center", // Update this to "center"
+  alignItems: "center",
   justifyContent: "left",
   color: "white",
   padding: "3vh",
@@ -29,7 +26,6 @@ const Contents = styled("div", {
     right: "60px",
   },
 });
-
 
 export function ContainerContents() {
   return (
