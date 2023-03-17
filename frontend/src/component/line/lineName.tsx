@@ -6,12 +6,12 @@ export const LineName = styled("div", {
   height: "20px",
   padding: "5px",
   textAlign: "left",
-  marginLeft: "10px",
+  marginLeft: "15px",
 
   // font
   fontSize: "18px",
   fontWeight: "bold",
 
   // color
-  color: "white",
+  color: "#202020",
 });

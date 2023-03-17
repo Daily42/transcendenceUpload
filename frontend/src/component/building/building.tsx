@@ -12,7 +12,6 @@ export const OuterBuilding = styled("div", {
   // content
   color: "black",
   cursor: "pointer",
-  //borderRadius: "5px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -30,11 +29,10 @@ export const OuterBuilding = styled("div", {
   }
 });
 
-
 export const Building = styled("div", {
   // size & border & shadow
-  width: "98%", // Update this line
-  height: "98%",
+  width: "100%", // Update this line
+  height: "100%",
   //   marginLeft: "5%",
   boxShadow: "0px 4px 4px #000000",
 
@@ -44,14 +42,13 @@ export const Building = styled("div", {
 
   // content
   color: "black",
-  cursor: "pointer",
-  //borderRadius: "5px",
+  borderRadius: "0px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "flex-start",
-  paddingTop: "5px",
-  paddingBottom: "5px",
+  paddingTop: "15px",
+  paddingBottom: "15px",
   marginTop: "5px",
   marginBottom: "5px",
 

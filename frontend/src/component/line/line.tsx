@@ -1,7 +1,7 @@
 import { styled } from "@stitches/react";
 
 export const Line = styled("div", {
-  width: "calc(100% - 15px)",
+  width: "calc(100% - 30px)",
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",

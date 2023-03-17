@@ -24,14 +24,12 @@ export function Seocho() {
       className="building seocho"
     >
       <Line key="row-2" className="row 5F">
-        <LineName>5F</LineName>
         <LineWrapper>
           <Place className="C10" />
           <Place className="C9" />
         </LineWrapper>
       </Line>
       <Line key="row-1" className="row 4F">
-        <LineName>4F</LineName>
         <LineWrapper>
           <Place className="C8" />
           <Place className="C7" />

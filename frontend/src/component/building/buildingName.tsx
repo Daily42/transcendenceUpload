@@ -6,4 +6,5 @@ export const BuildingName = styled("div", {
   fontWeight: "bold",
   marginBottom: "10px",
   color: "white",
+  cursor: "pointer",
 });

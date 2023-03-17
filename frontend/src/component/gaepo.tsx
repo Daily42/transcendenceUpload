@@ -14,18 +14,18 @@ export function Gaepo() {
   const names = ["폴라베어와함께하는어쩌고저쩌고반드시신나고", "밤새면사람이미쳐간다니까요?진짜에요흐헤헤으흐헤헤헤헤", "!!!!헉!!!!!므ㅏ느암느아믕!~!!!"];
 
   return (
-    <OuterBuilding
-      style={{
-        backgroundImage: "url(../../public/asset/texture_brick.png)",
-      }}
-    >
+    // <OuterBuilding
+    //   style={{
+    //     backgroundImage: "url(../../public/asset/texture_brick.png)",
+    //   }}
+    // >
       <Building
         onClick={() => {
           navigate("/daily");
         }}
         style={{
           // backgroundImage: "url(../../public/asset/texture_brick.png)",
-          backgroundColor: "rgba(10, 10, 10, 0.8)",
+          backgroundColor: "rgba(200, 200, 200, 0.9)",
         }}
         className="building gaepo"
       >
@@ -82,6 +82,6 @@ export function Gaepo() {
           </LineWrapper>
         </Line>
       </Building>
-    </OuterBuilding>
+    // </OuterBuilding>
   );
 }
