@@ -1,7 +1,6 @@
 import React from "react";
 import { styled } from "@stitches/react";
 import { useNavigate } from "react-router-dom";
-import * as theme from "../theme/theme";
 
 const NavMenu = styled("div", {
   backgroundColor: "#000000",

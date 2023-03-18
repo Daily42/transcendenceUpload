@@ -4,9 +4,24 @@ import { ViewTemplate } from "./viewTemplate2";
 
 import { ContainerContents } from "../container/contentRoot";
 
-export function Root() {
+export function Root(
+  props: {
+    darkMode: boolean,
+    toggleDarkMode: Function
+  }
+) {
+  const { darkMode, toggleDarkMode } = props;
   return (
-    <ViewTemplate content={<ContainerContents />} />
+    <ViewTemplate
+      darkMode={darkMode}
+      toggleDarkMode={toggleDarkMode}
+      content={(
+        <ContainerContents
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
+      )}
+    />
   );
 }
 

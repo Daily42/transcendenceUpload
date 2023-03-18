@@ -1,45 +1,54 @@
+/* eslint-disable import/no-unresolved */
 // React & libraries
 import React, { useEffect, useState } from "react";
-import { styled } from "@stitches/react";
+import styled from "@emotion/styled";
 
 // Enum & Interface
 import ITFlocation from "../interface/location.interface";
+import ContainerProps from "../interface/containerProps.interface";
+
+// theme
+import { DARK, LIGHT } from "../theme/theme";
 
 // pre-made
-import App from "../component/chatgpt";
-import { Gaepo } from "../component/gaepo";
-import { Seocho } from "../component/seocho";
-import * as theme from "../theme/theme"
+import { Main } from "../component/Main";
 
 // API
 import { getLocationsList } from "../network/api/api"
 
 // import { BuildingName } from "../component/building/buildingName"
 
-const Contents = styled("div", {
-  height: `calc(${theme.NAV_LEFT_HEIGHT} - 50px)`,
-  width: "70%",
-  marginLeft: "15%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "left",
-  color: "white",
-  padding: "3vh",
-  overflowX: "hidden",
-  overflowY: "scroll",
-  "&::-webkit-scrollbar": {
-    background: "none",
-    width: "0.6rem",
-  },
-  "&::-webkit-scrollbar-thumb": {
-    background: "#BDBDBD",
-    width: "0.4rem",
-    right: "60px",
-  },
-});
+const Contents = styled.div<ContainerProps>`
+  height: calc(100% - 50px);
+  width: 70%;
+  margin-left: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  color: ${(props) => (props.darkMode ? DARK.TEXT : LIGHT.TEXT)};
+  background-color: ${(props) => (props.darkMode ? DARK.BACKGROUND : LIGHT.BACKGROUND)};
+  padding: 3vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    background: none;
+    width: 0.6rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    width: 0.4rem;
+    right: 60px;
+  }
+`;
 
-export function ContainerContents() {
+export function ContainerContents(
+  props: {
+    darkMode: boolean,
+    toggleDarkMode: Function
+  }
+) {
+  const { darkMode, toggleDarkMode } = props;
   const [location, setLocation] = useState<ITFlocation[]>([]);
 
   useEffect(() => {
@@ -50,8 +59,8 @@ export function ContainerContents() {
   }, []);
 
   return (
-    <Contents className="contents">
-      <App />
+    <Contents className="contents" darkMode={darkMode}>
+      <Main darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
     </Contents>
   );
 }

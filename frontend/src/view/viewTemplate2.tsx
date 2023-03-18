@@ -1,24 +1,33 @@
 import React from "react";
-import { styled } from "@stitches/react";
+import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { ReducerType } from "../redux/rootReducer";
 import { AuthData } from "../redux/slices/auth";
+import { DARK, LIGHT } from "../theme/theme"
+import ContainerProps from "../interface/containerProps.interface";
 
 import { ContainerNavMenu } from "../container/navMenu2";
 
-export const ViewWrapper = styled("div", {
-  display: "block",
-  width: "100vw",
-  height: "100vh",
-  overflow: "hidden",
-  backgroundColor: "#2D2D2D",
-});
+const ViewWrapper = styled.div<ContainerProps>`
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: ${(props) => (props.darkMode ? DARK.BACKGROUND : LIGHT.BACKGROUND)};
+`;
 
-export function ViewTemplate({ content } : any) {
+export function ViewTemplate(
+  props: {
+    content: any,
+    darkMode: boolean,
+    toggleDarkMode: Function
+  }
+) {
+  const { content, darkMode, toggleDarkMode } = props;
   return (
     <ViewWrapper className="view">
-      <ContainerNavMenu />
+      <ContainerNavMenu title="Daily42" darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       {content}
     </ViewWrapper>
   );

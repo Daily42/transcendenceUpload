@@ -1,6 +1,7 @@
 import PlaceType from "../enum/placeType.enum"
 import ITFlocation from "./location.interface"
 import ITFdate from "./date.interface"
+import Itype from "./type.interface"
 
 export default interface ITFevent {
   id: number; // event id seq
@@ -12,10 +13,5 @@ export default interface ITFevent {
   locationName: string;
   location: ITFlocation;
   dates: ITFdate[];
-  // tmp
-  type: {
-    id: number;
-    title: string;
-    color: string;
-  };
+  type: Itype[];
 }
