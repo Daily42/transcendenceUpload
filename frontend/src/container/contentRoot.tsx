@@ -51,8 +51,7 @@ export function ContainerContents() {
 
   return (
     <Contents className="contents">
-      <Gaepo />
-      <Seocho />
+      <App />
     </Contents>
   );
 }

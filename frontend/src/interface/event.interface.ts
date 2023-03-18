@@ -12,4 +12,10 @@ export default interface ITFevent {
   locationName: string;
   location: ITFlocation;
   dates: ITFdate[];
+  // tmp
+  type: {
+    id: number;
+    title: string;
+    color: string;
+  };
 }

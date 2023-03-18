@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { ReducerType } from "../redux/rootReducer";
 import { AuthData } from "../redux/slices/auth";
 
-import { ContainerNavMenu } from "../container/navMenu";
+import { ContainerNavMenu } from "../container/navMenu2";
 
 export const ViewWrapper = styled("div", {
   display: "block",

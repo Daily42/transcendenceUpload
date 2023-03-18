@@ -17,7 +17,7 @@ import { PlaceContent } from "./place/placeContent"
 import { Event } from "./event/event"
 
 // API
-import { getEventsList } from "../network/api/api"
+import { getEventsList, getEventByDate } from "../network/api/api"
 
 export function Gaepo() {
   const navigate = useNavigate();
