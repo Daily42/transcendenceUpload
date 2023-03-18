@@ -3,6 +3,8 @@ import { styled } from "@stitches/react";
 import * as theme from "../theme/theme";
 import DatePicker from "react-multi-date-picker"
 import DatePanel from "react-multi-date-picker/plugins/date_panel"
+import TimePicker from "react-multi-date-picker/plugins/time_picker"
+import "react-multi-date-picker/styles/layouts/mobile.css"
 
 const Contents = styled("div", {
   backgroundColor: "#F0F0F0",
@@ -11,9 +13,8 @@ const Contents = styled("div", {
   marginLeft: "15%",
   display: "flex",
   flexDirection: "column",
-  alignItems: "center", // Update this to "center"
-  justifyContent: "left",
-  color: "white",
+  alignItems: "center",
+  color: "#333",
   padding: "3vh",
   overflowX: "hidden",
   overflowY: "scroll",
@@ -58,6 +59,7 @@ const Input = styled("input", {
   borderRadius: "8px",
   color: "#333",
   padding: "16px",
+  fontSize: "16px",
 });
 
 const TextArea = styled("textarea", {
@@ -67,6 +69,7 @@ const TextArea = styled("textarea", {
   color: "#333",
   minHeight: "200px",
   padding: "16px",
+  fontSize: "16px",
 });
 
 const SubmitButton = styled("button", {
@@ -90,6 +93,7 @@ const DatePickerInput = styled(DatePicker, {
   borderRadius: "8px",
   color: "#333",
   padding: "16px",
+  fontSize: "16px",
 });
 
 const Heading = styled("h1", {
@@ -106,6 +110,25 @@ const Dropdown = styled("select", {
   borderRadius: "8px",
   color: "#333",
   padding: "16px",
+  fontSize: "16px",
+});
+
+const CheckboxLabel = styled("label", {
+  display: "flex",
+  alignItems: "center",
+  fontSize: "16px",
+  cursor: "pointer",
+  marginBottom: "16px",
+});
+
+const CheckboxInput = styled("input", {
+  marginRight: "8px",
+  cursor: "pointer",
+});
+
+const CheckboxText = styled("span", {
+  fontSize: "16px",
+  marginLeft: "8px",
 });
 
 const WritePost = () => {
@@ -113,16 +136,56 @@ const WritePost = () => {
     title: "",
     content: "",
     location: "",
+    term: "",
     date: [],
   });
-  const [selectedOption, setSelectedOption] = useState("Option 1");
-  const [selectedOption2, setSelectedOption2] = useState("Option 1");
-  const [showLocationInput, setShowLocationInput] = useState(false);
 
-  const options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"];
-  const options2 = Array.from({ length: 16 }, (_, i) => `Option ${i + 1}`);
+  const [isRange, setIsRange] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("42seoul_official");
+  const [selectedOption2, setSelectedOption2] = useState("개포 클러스터");
+  const [showLocationInputgaepo, setshowLocationInputgaepo] = useState(true);
 
-  const handleInputChange = (event) => {
+  useEffect(() => {
+    let selectedDate;
+    if (formData.date[formData.date.length - 1]) {
+      const { year, month, day, hour, minute, } = formData.date[formData.date.length - 1];
+      const date = new Date(year, month - 1, day, hour, minute);
+      selectedDate = date.toISOString();
+    } else {
+      selectedDate = null;
+    }
+    console.log('02 : ', selectedDate);
+  }, [formData.date]);
+
+  const options = [
+    "42seoul_official",
+    "study group",
+    "club(동아리)",
+    "hackerthon & conference",
+    "etc"
+  ];
+  const options2 = [
+    "개포 클러스터",
+    "서초 클러스터",
+    "기타",
+    "개포 클러스터 - 2층 Cluster 01",
+    "개포 클러스터 - 2층 Cluster 02",
+    "개포 클러스터 - 4층 Cluster 03",
+    "개포 클러스터 - 4층 Cluster 04",
+    "개포 클러스터 - 5층 Cluster 05",
+    "개포 클러스터 - 5층 Cluster 06",
+    "서초 클러스터 - 4층 Cluster 07",
+    "서초 클러스터 - 4층 Cluster 08",
+    "서초 클러스터 - 5층 Cluster 09",
+    "서초 클러스터 - 5층 Cluster 10",
+    "개포 클러스터 - 3층 ClusterX 01",
+    "개포 클러스터 - 3층 ClusterX 02",
+    "개포 클러스터 - 1층 오픈클러스터",
+    "개포 클러스터 - 1층 게임장",
+    "개포 클러스터 - 1층 42Lab",
+  ];
+
+  const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -130,21 +193,35 @@ const WritePost = () => {
     }));
   };
 
-  const handleOptionChange = (event) => {
+  const handleInputChange2 = (event: any) => {
+    const { name, value } = event.target;
+    const onlyNumber = value.replace(/[^0-9]/g, '')
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: onlyNumber,
+    }));
+  };
+
+  const handleOptionChange = (event: any) => {
     setSelectedOption(event.target.value);
   };
 
-  const handleOption2Change = (event) => {
+  const handleOption2Change = (event: any) => {
     const { value } = event.target;
     setSelectedOption2(value);
-    if (value === "Option 16") {
-      setShowLocationInput(true);
+    if (value === "기타" || value === "개포 클러스터" || value === "서초 클러스터") {
+      setshowLocationInputgaepo(true);
     } else {
-      setShowLocationInput(false);
+      setshowLocationInputgaepo(false);
+      formData.location = '';
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleCheckboxChange = () => {
+    setIsRange(!isRange);
+  };
+
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     console.log(formData, selectedOption, selectedOption2);
   };
@@ -152,26 +229,40 @@ const WritePost = () => {
   return (
     <Container>
       <Card>
-        <Heading>Write a New Post</Heading>
+        <Heading>새로운 글 작성</Heading>
         <Form onSubmit={handleSubmit}>
           <Input
             type="text"
             name="title"
-            placeholder="Title"
+            placeholder="제목"
             value={formData.title}
             onChange={handleInputChange}
           />
           <TextArea
             name="content"
-            placeholder="Write something..."
+            placeholder="글 작성"
             value={formData.content}
             onChange={handleInputChange}
           />
           <DatePickerInput
+            style={{
+              width: "100%",
+              boxSizing: "border-box",
+              height: "26px"
+            }}
+            containerStyle={{
+              width: "100%"
+            }}
+            className="rmdp-mobile"
+            multiple={!isRange}
+            range={isRange}
             name="date"
-            placeholder="Pick a date"
-            format="DD/MM/YYYY"
-            plugins={[<DatePanel />]}
+            placeholder="시작날짜 및 시각"
+            format="MM/DD/YYYY"
+            plugins={[
+              <TimePicker position="bottom" />,
+              <DatePanel markFocused />
+            ]}
             value={formData.date}
             onChange={(value) =>
               setFormData((prevFormData) => ({
@@ -179,6 +270,17 @@ const WritePost = () => {
                 date: value,
               }))
             }
+          />
+          <CheckboxLabel>
+            <CheckboxInput type="checkbox" onChange={handleCheckboxChange} />
+            <CheckboxText>Range mode</CheckboxText>
+          </CheckboxLabel>
+          <Input
+            type="term"
+            name="term"
+            placeholder="기간(분)"
+            value={formData.term}
+            onChange={handleInputChange2}
           />
           <Dropdown value={selectedOption} onChange={handleOptionChange}>
             {options.map((option) => (
@@ -194,15 +296,15 @@ const WritePost = () => {
               </option>
             ))}
           </Dropdown>
-          {showLocationInput && (
-              <Input
-                type="text"
-                name="location"
-                placeholder="Location"
-                value={formData.location}
-                onChange={handleInputChange}
-              />
-            )}
+          {showLocationInputgaepo && (
+            <Input
+              type="text"
+              name="location"
+              placeholder="장소"
+              value={formData.location}
+              onChange={handleInputChange}
+            />
+          )}
           <SubmitButton type="submit">Post</SubmitButton>
         </Form>
       </Card>
