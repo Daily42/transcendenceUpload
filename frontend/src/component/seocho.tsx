@@ -25,14 +25,14 @@ export function Seocho() {
     >
       <Line key="row-2" className="row 5F">
         <LineWrapper>
-          <Place className="C10" />
-          <Place className="C9" />
+          <Place location="C10" />
+          <Place location="C9" />
         </LineWrapper>
       </Line>
       <Line key="row-1" className="row 4F">
         <LineWrapper>
-          <Place className="C8" />
-          <Place className="C7" />
+          <Place location="C8" />
+          <Place location="C7" />
         </LineWrapper>
       </Line>
     </Building>

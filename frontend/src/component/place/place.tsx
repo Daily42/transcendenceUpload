@@ -1,93 +1,18 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { Component } from "react";
+// react, libraries
 import { styled } from "@stitches/react";
-// import { useNavigate } from "react-router-dom";
-// import ITFevent from "../../interface/event.interface";
-// import ITFlocation from "../../interface/location.interface";
-// import typeIdToEventType from "../util/typeIdToEventType";
+import { useNavigate } from "react-router-dom";
+import { Event } from "../event/event";
 
-// export const PlaceDiv = styled("div", {
-//   width: "calc(100% - 16px)",
-//   backgroundColor: "rgba(10, 10, 10, 0.8)",
-//   // border: "3px solid white",
-//   color: "white",
-//   borderRadius: "5px",
-//   minHeight: "85px",
-//   margin: "7.5px",
-//   alignItems: "center",
-//   justifyContent: "center",
-//   cursor: "pointer",
-//   display: "flex",
-//   flexDirection: "column",
-//   overflow: "hidden",
+// interface, enum
 
-//   boxShadow: "0px 4px 4px #000000",
-//   transitionDuration: "0.5s",
-//   "&:hover": {
-//     // backgroundColor: "rgba(255, 255, 255, 1.0)",
-//     // color: "black"
-//     backgroundColor: "rgba(0, 0, 0, 1.0)",
-//   }
-// });
+// pre-made
+import { PlaceName } from "./placeName";
 
-// interface PlaceProps {
-//   place: ITFlocation;
-//   events: ITFevent[];
-//   navigate: (path: string) => void;
-// }
-
-// class Place extends Component<PlaceProps> {
-//   handlePlaceClick = () => {
-//     this.props.navigate(`/daily/${this.props.place.title}`);
-//   };
-
-//   getIcon(eventTypeId: string) {
-//     switch (eventTypeId) {
-//       case "EV00":
-//         return "🔴";
-//       case "EV10":
-//         return "🟢";
-//       case "EV20":
-//         return "🔵";
-//       case "EV30":
-//         return "🟣";
-//       case "EV40":
-//         return "⚫";
-//       default:
-//         return "";
-//     }
-//   }
-
-//   render() {
-//     const { place, events } = this.props;
-
-//     return (
-//       <PlaceDiv className="place" onClick={this.handlePlaceClick}>
-//         <h3>{place.title}</h3>
-//         {events.map((event) => {
-//           const eventTypeId = typeIdToEventType(event?.typeId);
-
-//           return (
-//             <div key={event.id}>
-//               <span>{this.getIcon(eventTypeId)}</span>
-//               <span>{event.title}</span>
-//             </div>
-//           );
-//         })}
-//       </PlaceDiv>
-//     );
-//   }
-// }
-
-// export default Place;
-
-export const Place = styled("div", {
+export const PlaceDiv = styled("div", {
   width: "calc(100% - 16px)",
-  backgroundColor: "rgba(10, 10, 10, 0.8)",
+  backgroundColor: "rgba(225, 225, 225, 1)",
   // border: "3px solid white",
-  color: "white",
+  color: "rgba(0, 0, 0, 0.9)",
   borderRadius: "5px",
   minHeight: "85px",
   margin: "7.5px",
@@ -101,8 +26,29 @@ export const Place = styled("div", {
   boxShadow: "0px 4px 4px #000000",
   transitionDuration: "0.5s",
   "&:hover": {
-    // backgroundColor: "rgba(255, 255, 255, 1.0)",
-    // color: "black"
-    backgroundColor: "rgba(0, 0, 0, 1.0)",
+    backgroundColor: "rgba(255, 255, 255, 1.0)",
+    color: "black",
+    // textShadow: "0.5px 0.5px 0.5px rgba(0, 0, 0, 0.8)",
   }
 });
+
+export function Place(props: any) {
+  const { location } = props;
+  const navigate = useNavigate();
+
+  const path = "/add";
+  const handleClick = () => {
+    navigate(path);
+  };
+
+  const event1 = "11111123456789876543234567898765432134567891243235432";
+  const event2 = "11111123456789876543234567898765432134567891243235432";
+
+  return (
+    <PlaceDiv onClick={handleClick} className={`place ${location}`}>
+      <PlaceName>{location}</PlaceName>
+      <Event event={event1} />
+      <Event event={event2} />
+    </PlaceDiv>
+  )
+}

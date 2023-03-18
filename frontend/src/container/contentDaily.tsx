@@ -1,7 +1,18 @@
+// React & libraries
+import React, { useEffect, useState } from "react";
 import { styled } from "@stitches/react";
-import * as theme from "../theme/theme";
+
+// Enum & Interface
+import ITFlocation from "../interface/location.interface";
+
+// pre-made
 import { Gaepo } from "../component/gaepo";
 import { Seocho } from "../component/seocho";
+import * as theme from "../theme/theme"
+
+// API
+import { getLocationsList } from "../network/api/api"
+
 // import { BuildingName } from "../component/building/buildingName"
 
 const Contents = styled("div", {
@@ -28,6 +39,15 @@ const Contents = styled("div", {
 });
 
 export function ContainerContents() {
+  const [location, setLocation] = useState<ITFlocation[]>([]);
+
+  useEffect(() => {
+    getLocationsList().then((response: any) => {
+      console.log("response: ", response);
+      setLocation(response);
+    });
+  }, []);
+
   return (
     <Contents className="contents">
       <Gaepo />
