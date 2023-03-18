@@ -4,10 +4,26 @@ import { ViewTemplate } from "./viewTemplate";
 
 import { ContainerContents } from "../container/contentDaily";
 
-export function Daily() {
+export function Daily(
+  props: {
+    darkMode: boolean,
+    toggleDarkMode: Function
+  }
+) {
+  const { darkMode, toggleDarkMode } = props;
   return (
-    <ViewTemplate content={<ContainerContents />} />
+    <ViewTemplate
+      darkMode={darkMode}
+      toggleDarkMode={toggleDarkMode}
+      content={(
+        <ContainerContents
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
+      )}
+    />
   );
 }
+
 
 export default Daily;

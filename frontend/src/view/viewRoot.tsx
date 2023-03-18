@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "@stitches/react";
-import { ViewTemplate } from "./viewTemplate2";
+import { ViewTemplate } from "./viewTemplate";
 
 import { ContainerContents } from "../container/contentRoot";
 

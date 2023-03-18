@@ -42,8 +42,13 @@ const Contents = styled.div<ContainerProps>`
   }
 `;
 
-
-export function ContainerContents() {
+export function ContainerContents(
+  props: {
+    darkMode: boolean,
+    toggleDarkMode: Function
+  }
+) {
+  const { darkMode, toggleDarkMode } = props;
   const [location, setLocation] = useState<ITFlocation[]>([]);
 
   useEffect(() => {
@@ -54,7 +59,7 @@ export function ContainerContents() {
   }, []);
 
   return (
-    <Contents className="contents">
+    <Contents className="contents" darkMode={darkMode}>
       <Gaepo />
       <Seocho />
     </Contents>

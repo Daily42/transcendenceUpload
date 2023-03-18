@@ -7,7 +7,7 @@ import { AuthData } from "../redux/slices/auth";
 import { DARK, LIGHT } from "../theme/theme"
 import ContainerProps from "../interface/containerProps.interface";
 
-import { ContainerNavMenu } from "../container/navMenu2";
+import { ContainerNavMenu } from "../container/navMenu";
 
 const ViewWrapper = styled.div<ContainerProps>`
   display: block;

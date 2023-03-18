@@ -11,6 +11,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
+    console.log("TOGGLE BUTTON HI");
     setDarkMode(!darkMode);
   };
 
@@ -28,8 +29,8 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route path="/Daily" element={<Daily />} />
-          <Route path="/Add" element={<Add />} />
+          <Route path="/Daily" element={<Daily darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+          <Route path="/Add" element={<Add darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
           <Route path="/" element={<Root darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
           <Route path="/*" element={<RootControl />} />
         </Routes>

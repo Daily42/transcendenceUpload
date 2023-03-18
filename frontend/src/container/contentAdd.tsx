@@ -1,137 +1,145 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "@stitches/react";
-import * as theme from "../theme/theme";
-import DatePicker from "react-multi-date-picker"
-import DatePanel from "react-multi-date-picker/plugins/date_panel"
-import TimePicker from "react-multi-date-picker/plugins/time_picker"
-import "react-multi-date-picker/styles/layouts/mobile.css"
+import styled from "@emotion/styled";
 
-const Contents = styled("div", {
-  backgroundColor: "#F0F0F0",
-  height: `calc(${theme.NAV_LEFT_HEIGHT} - 50px)`,
-  width: "70%",
-  marginLeft: "15%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  color: "#333",
-  padding: "3vh",
-  overflowX: "hidden",
-  overflowY: "scroll",
-  "&::-webkit-scrollbar": {
-    background: "none",
-    width: "0.6rem",
-  },
-  "&::-webkit-scrollbar-thumb": {
-    background: "#BDBDBD",
-    width: "0.4rem",
-    right: "60px",
-  },
-});
+import DatePicker from "react-multi-date-picker";
+import DatePanel from "react-multi-date-picker/plugins/date_panel";
+import TimePicker from "react-multi-date-picker/plugins/time_picker";
+import { DARK, LIGHT } from "../theme/theme";
+import ContainerProps from "../interface/containerProps.interface";
+import "react-multi-date-picker/styles/layouts/mobile.css";
 
-const Container = styled("div", {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "#F0F0F0",
-  height: "100vh",
-});
+const Contents = styled.div<ContainerProps>`
+  height: calc(100% - 50px);
+  width: 70%;
+  margin-left: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  color: ${(props) => (props.darkMode ? DARK.TEXT : LIGHT.TEXT)};
+  background-color: ${(props) => (props.darkMode ? DARK.BACKGROUND : LIGHT.BACKGROUND)};
+  padding: 3vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    background: none;
+    width: 0.6rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    width: 0.4rem;
+    right: 60px;
+  }
+`;
 
-const Card = styled("div", {
-  backgroundColor: "#fff",
-  borderRadius: "8px",
-  boxShadow: "0px 4px 24px rgba(0, 0, 0, 0.08)",
-  maxWidth: "600px",
-  padding: "32px",
-  width: "100%",
-});
+const Container = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => (props.darkMode ? DARK.BACKGROUND : LIGHT.BACKGROUND)};
+  height: 100vh;
+`;
 
-const Form = styled("form", {
-  display: "flex",
-  flexDirection: "column",
-  gap: "16px",
-});
+const Card = styled.div<ContainerProps>`
+  background-color: ${(props) => (props.darkMode ? DARK.BACKGROUND : LIGHT.BACKGROUND)};
+  border-radius: 8px;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  padding: 32px;
+  width: 100%;
+`;
 
-const Input = styled("input", {
-  backgroundColor: "#F5F5F5",
-  border: "none",
-  borderRadius: "8px",
-  color: "#333",
-  padding: "16px",
-  fontSize: "16px",
-});
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
-const TextArea = styled("textarea", {
-  backgroundColor: "#F5F5F5",
-  border: "none",
-  borderRadius: "8px",
-  color: "#333",
-  minHeight: "200px",
-  padding: "16px",
-  fontSize: "16px",
-});
+const Input = styled.input<ContainerProps>`
+  background-color: ${(props) => (props.darkMode ? LIGHT.FORM : LIGHT.FORM)};
+  border: none;
+  border-radius: 8px;
+  color: ${(props) => (props.darkMode ? DARK.TEXT : LIGHT.TEXT)};
+  padding: 16px;
+  font-size: 16px;
+`;
 
-const SubmitButton = styled("button", {
-  backgroundColor: "#0070F3",
-  border: "none",
-  borderRadius: "8px",
-  color: "#fff",
-  cursor: "pointer",
-  fontSize: "16px",
-  fontWeight: "bold",
-  padding: "16px",
-  transition: "background-color 0.2s ease",
-  "&:hover": {
-    backgroundColor: "#0060D6",
-  },
-});
+const TextArea = styled.textarea<ContainerProps>`
+  background-color: ${(props) => (props.darkMode ? DARK.FORM : LIGHT.FORM)};
+  border: none;
+  border-radius: 8px;
+  color: #333;
+  min-height: 200px;
+  padding: 16px;
+  font-size: 16px;
+`;
 
-const DatePickerInput = styled(DatePicker, {
-  backgroundColor: "#F5F5F5",
-  border: "none",
-  borderRadius: "8px",
-  color: "#333",
-  padding: "16px",
-  fontSize: "16px",
-});
+const SubmitButton = styled.button<ContainerProps>`
+  background-color: #0070F3;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 16px;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: #0060D6;
+  }
+`;
 
-const Heading = styled("h1", {
-  color: "#333",
-  fontSize: "32px",
-  fontWeight: "bold",
-  marginBottom: "16px",
-  textAlign: "center",
-});
+const DatePickerInput = styled(DatePicker)<ContainerProps>`
+  background-color: ${(props) => (props.darkMode ? DARK.FORM : LIGHT.FORM)};
+  border: none;
+  border-radius: 8px;
+  color: ${(props) => (props.darkMode ? DARK.TEXT : LIGHT.TEXT)};
+  padding: 16px;
+  font-size: 16px;
+`;
 
-const Dropdown = styled("select", {
-  backgroundColor: "#F5F5F5",
-  border: "none",
-  borderRadius: "8px",
-  color: "#333",
-  padding: "16px",
-  fontSize: "16px",
-});
+const Heading = styled.h1<ContainerProps>`
+  color: ${(props) => (props.darkMode ? DARK.TEXT : LIGHT.TEXT)};
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  text-align: center;
+`;
 
-const CheckboxLabel = styled("label", {
-  display: "flex",
-  alignItems: "center",
-  fontSize: "16px",
-  cursor: "pointer",
-  marginBottom: "16px",
-});
+const Dropdown = styled.select<ContainerProps>`
+  background-color: ${(props) => (props.darkMode ? DARK.FORM : LIGHT.FORM)};
+  border: none;
+  border-radius: 8px;
+  color: #333;
+  padding: 16px;
+  font-size: 16px;
+`;
 
-const CheckboxInput = styled("input", {
-  marginRight: "8px",
-  cursor: "pointer",
-});
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 16px;
+`;
 
-const CheckboxText = styled("span", {
-  fontSize: "16px",
-  marginLeft: "8px",
-});
+const CheckboxInput = styled.input`
+  margin-right: 8px;
+  cursor: pointer;
+`;
 
-const WritePost = () => {
+const CheckboxText = styled.span`
+  font-size: 16px;
+  margin-left: 8px;
+`;
+
+function WritePost(
+  props: {
+    darkMode: boolean,
+  }
+) {
+  const { darkMode } = props;
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -154,7 +162,7 @@ const WritePost = () => {
     } else {
       selectedDate = null;
     }
-    console.log('02 : ', selectedDate);
+    console.log("02 : ", selectedDate);
   }, [formData.date]);
 
   const options = [
@@ -195,7 +203,7 @@ const WritePost = () => {
 
   const handleInputChange2 = (event: any) => {
     const { name, value } = event.target;
-    const onlyNumber = value.replace(/[^0-9]/g, '')
+    const onlyNumber = value.replace(/[^0-9]/g, "")
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: onlyNumber,
@@ -213,7 +221,7 @@ const WritePost = () => {
       setshowLocationInputgaepo(true);
     } else {
       setshowLocationInputgaepo(false);
-      formData.location = '';
+      formData.location = "";
     }
   };
 
@@ -227,15 +235,16 @@ const WritePost = () => {
   };
 
   return (
-    <Container>
-      <Card>
-        <Heading>새로운 글 작성</Heading>
+    <Container darkMode={darkMode}>
+      <Card darkMode={darkMode}>
+        <Heading darkMode={darkMode}>새로운 글 작성</Heading>
         <Form onSubmit={handleSubmit}>
           <Input
             type="text"
             name="title"
             placeholder="제목"
             value={formData.title}
+            darkMode={darkMode}
             onChange={handleInputChange}
           />
           <TextArea
@@ -253,6 +262,7 @@ const WritePost = () => {
             containerStyle={{
               width: "100%"
             }}
+            darkMode={darkMode}
             className="rmdp-mobile"
             multiple={!isRange}
             range={isRange}
@@ -310,15 +320,21 @@ const WritePost = () => {
       </Card>
     </Container>
   );
-};
+}
 
 export default WritePost;
 
-export function ContainerContents() {
+export function ContainerContents(
+  props: {
+    darkMode: boolean,
+    toggleDarkMode: Function
+  }
+) {
+  const { darkMode, toggleDarkMode } = props;
   return (
-    <Contents className="contents">
+    <Contents className="contents" darkMode={darkMode}>
       <div>
-        <WritePost />
+        <WritePost darkMode={darkMode} />
       </div>
     </Contents>
   );
