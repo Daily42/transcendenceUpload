@@ -1,10 +1,10 @@
 import React from "react";
-import { styled } from "@stitches/react";
+import styled from "@emotion/styled";
 import { ViewTemplate } from "./viewTemplate";
 
-import { ContainerContents } from "../container/contentDaily";
+import { ContainerContents } from "../container/contentLogin";
 
-export function Daily(
+export function Login(
   props: {
     darkMode: boolean,
     toggleDarkMode: Function
@@ -25,5 +25,4 @@ export function Daily(
   );
 }
 
-
-export default Daily;
+export default Login;

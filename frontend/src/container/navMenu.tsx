@@ -6,9 +6,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { DARK, LIGHT } from "../theme/theme";
-import ContainerProps from "../interface/containerProps.interface";
+import Props from "../interface/props.interface";
 
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<Props>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -18,6 +18,7 @@ const Container = styled.div<ContainerProps>`
   padding: 0 10px;
   color: ${(props) => (props.darkMode ? DARK.TEXT : LIGHT.TEXT)};
   text-shadow: 0.5px 0.5px 2px ${(props) => (props.darkMode ? DARK.SHADOW : LIGHT.SHADOW)};
+  transition-duration: 1s;
 `;
 
 interface ButtonProps {
@@ -44,7 +45,6 @@ const Button = styled.button<ButtonProps>`
   border-radius: 50%;
   padding: 0;
   box-shadow: 0 1px 4px ${(props) => props.color};
-  transition-duration: 3s;
 
   &:hover {
     & > img {
@@ -60,10 +60,16 @@ const ImgIcon = styled.img`
   opacity: 0.5;
 `;
 
-const Title = styled.div`
+const Title = styled.div<Props>`
   margin-left: 20px;
   font-size: 1.2rem;
-  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 0.2px 0.2px 4px ${(props) => (props.darkMode ? DARK.TEXT_SHADOW : LIGHT.TEXT_SHADOW)};
+  #transition-duration: 0.5s;
+  &:hover {
+    #font-weight: 500;
+    text-shadow: 1px 1px 1px ${(props) => (props.darkMode ? DARK.TEXT_SHADOW : LIGHT.TEXT_SHADOW)};
+  }
 `;
 
 const DarkModeButton = styled.button`
@@ -109,9 +115,9 @@ export function ContainerNavMenu(
             alt="Maximize Icon"
           />
         </Button>
-        <Title>{title}</Title>
+        <Title onClick={() => { navigateTo("/") }} darkMode={darkMode}>{title}</Title>
       </ButtonContainer>
-      <div onClick={() => { navigateTo("/add") }}>ADD</div>
+      {/* <div onClick={() => { navigateTo("/add") }}>ADD</div> */}
       <DarkModeButton onClick={toggleDarkMode}>
         {darkMode ? "Turn off" : "Turn on"} Dark Mode
       </DarkModeButton>

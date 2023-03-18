@@ -5,11 +5,11 @@ import { Navigate } from "react-router-dom";
 import { ReducerType } from "../redux/rootReducer";
 import { AuthData } from "../redux/slices/auth";
 import { DARK, LIGHT } from "../theme/theme"
-import ContainerProps from "../interface/containerProps.interface";
+import Props from "../interface/props.interface";
 
 import { ContainerNavMenu } from "../container/navMenu";
 
-const ViewWrapper = styled.div<ContainerProps>`
+const ViewWrapper = styled.div<Props>`
   display: block;
   width: 100vw;
   height: 100vh;

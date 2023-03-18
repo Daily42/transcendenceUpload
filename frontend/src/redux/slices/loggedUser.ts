@@ -15,7 +15,6 @@ export const loggedUser = createSlice({
     nick: "unknown",
     mail: "unknown@unknown.com",
     img: "/asset/profileImage/default.png",
-    status: "USST10"
   } as LoggedUserData,
   reducers: {
     // eslint-disable-next-line no-return-assign

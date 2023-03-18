@@ -1,17 +1,19 @@
 // emotions styles
 
 export const LIGHT = {
-  HEADER_BACKGROUND: "#F0F0F0",
-  BACKGROUND: "#E6E6E6",
-  TEXT: "#2D2D2D",
+  HEADER_BACKGROUND: "#ebebea",
+  BACKGROUND: "#dedbdb",
+  TEXT: "#040404",
   SHADOW: "rgba(233,233,233,0.4)",
+  TEXT_SHADOW: "rgba(40,40,40,0.4)",
   FORM: "#FFFFFF",
 }
 
 export const DARK = {
-  HEADER_BACKGROUND: "#2D2D2D",
-  BACKGROUND: "#373737",
+  HEADER_BACKGROUND: "#101011",
+  BACKGROUND: "#323232",
   TEXT: "#F0F0F0",
   SHADOW: "rgba(40,40,40,0.4)",
+  TEXT_SHADOW: "rgba(233,233,233,0.4)",
   FORM: "#000000",
 }
