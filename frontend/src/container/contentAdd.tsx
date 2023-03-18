@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-
 import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { DARK, LIGHT } from "../theme/theme";
 import ContainerProps from "../interface/containerProps.interface";
 import "react-multi-date-picker/styles/layouts/mobile.css";
+import placeType from '../enum/placeType.enum';
+
 
 const Contents = styled.div<ContainerProps>`
   height: calc(100% - 50px);
@@ -142,28 +143,45 @@ function WritePost(
   const { darkMode } = props;
   const [formData, setFormData] = useState({
     title: "",
-    content: "",
-    location: "",
+    typeId: "1",
+    context: "",
+    locationCode: "PL0000",
+    locationName: "",
+    dates: [],
+  });
+
+  const [selectDate, setSelectData] = useState({
     term: "",
     date: [],
   });
-
   const [isRange, setIsRange] = useState(false);
   const [selectedOption, setSelectedOption] = useState("42seoul_official");
   const [selectedOption2, setSelectedOption2] = useState("개포 클러스터");
   const [showLocationInputgaepo, setshowLocationInputgaepo] = useState(true);
 
-  useEffect(() => {
-    let selectedDate;
-    if (formData.date[formData.date.length - 1]) {
-      const { year, month, day, hour, minute, } = formData.date[formData.date.length - 1];
-      const date = new Date(year, month - 1, day, hour, minute);
-      selectedDate = date.toISOString();
-    } else {
-      selectedDate = null;
-    }
-    console.log("02 : ", selectedDate);
-  }, [formData.date]);
+// useEffect(() => {
+//   if (selectDate.date.length > 0) {
+//     if (isRange) {
+//       const start = selectDate.date[0];
+//       const end = selectDate.date[1];
+//       let currentDate = new Date(start.year, start.month - 1, start.day + 1, start.hour, start.minute);
+//       const endDate = new Date(end.year, end.month - 1, end.day + 1, end.hour, end.minute);
+//       while (currentDate <= endDate) {
+//         console.log(currentDate.toISOString());
+//         currentDate = new Date(currentDate.getTime() + 1000 * 60 * 60 * 24);
+//       }
+//     } else {
+//       selectDate.date.map(date => {
+//         const { year, month, day, hour, minute } = date;
+//         const isoDate = new Date(year, month - 1, day + 1, hour, minute).toISOString();
+//         console.log(isoDate);
+//       });
+//     }
+//   } else {
+//     console.log("No date selected");
+//   }
+//   console.log(selectDate);
+// }, [selectDate.date, isRange]);
 
   const options = [
     "42seoul_official",
@@ -172,6 +190,15 @@ function WritePost(
     "hackerthon & conference",
     "etc"
   ];
+
+  const eventTypeMap = {
+    "42seoul_official": "1",
+    "study group": "2",
+    "club(동아리)": "3",
+    "hackerthon & conference": "4",
+    "etc": "5",
+  };
+  
   const options2 = [
     "개포 클러스터",
     "서초 클러스터",
@@ -193,6 +220,28 @@ function WritePost(
     "개포 클러스터 - 1층 42Lab",
   ];
 
+  const placeTypeMap = {
+    "개포 클러스터": placeType.PL0000,
+    "서초 클러스터": placeType.PL0100,
+    "기타": placeType.PL0200,
+    "개포 클러스터 - 2층 Cluster 01": placeType.PL0001,
+    "개포 클러스터 - 2층 Cluster 02": placeType.PL0002,
+    "개포 클러스터 - 4층 Cluster 03": placeType.PL0003,
+    "개포 클러스터 - 4층 Cluster 04": placeType.PL0004,
+    "개포 클러스터 - 5층 Cluster 05": placeType.PL0005,
+    "개포 클러스터 - 5층 Cluster 06": placeType.PL0006,
+    "서초 클러스터 - 4층 Cluster 07": placeType.PL0007,
+    "서초 클러스터 - 4층 Cluster 08": placeType.PL0008,
+    "서초 클러스터 - 5층 Cluster 09": placeType.PL0009,
+    "서초 클러스터 - 5층 Cluster 10": placeType.PL0010,
+    "개포 클러스터 - 3층 ClusterX 01": placeType.PL0011,
+    "개포 클러스터 - 3층 ClusterX 02": placeType.PL0012,
+    "개포 클러스터 - 1층 오픈클러스터": placeType.PL0013,
+    "개포 클러스터 - 1층 게임장": placeType.PL0014,
+    "개포 클러스터 - 1층 42Lab": placeType.PL0015,
+  };
+  
+
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -200,18 +249,23 @@ function WritePost(
       [name]: value,
     }));
   };
-
-  const handleInputChange2 = (event: any) => {
-    const { name, value } = event.target;
-    const onlyNumber = value.replace(/[^0-9]/g, "")
+  
+  const handleOptionChangeEvent = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: onlyNumber,
+      typeId: eventTypeMap[selectedValue],
     }));
   };
 
-  const handleOptionChange = (event: any) => {
-    setSelectedOption(event.target.value);
+  const handleInputChangeTerm = (event: any) => {
+    const { name, value } = event.target;
+    const onlyNumber = value.replace(/[^0-9]/g, "")
+    setSelectData((prevFormData) => ({
+      ...prevFormData,
+      [name]: onlyNumber,
+    }));
   };
 
   const handleOption2Change = (event: any) => {
@@ -221,17 +275,48 @@ function WritePost(
       setshowLocationInputgaepo(true);
     } else {
       setshowLocationInputgaepo(false);
-      formData.location = "";
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        locationName: "",
+      }));
     }
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      locationCode: placeTypeMap[value],
+    }));
   };
 
   const handleCheckboxChange = () => {
     setIsRange(!isRange);
+    selectDate.date = [];
+    formData.dates = [];
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(formData, selectedOption, selectedOption2);
+    if (isRange) {
+      const start = selectDate.date[0];
+      const end = selectDate.date[1];
+      let currentDate = new Date(start.year, start.month - 1, start.day + 1, start.hour, start.minute);
+      const endDate = new Date(end.year, end.month - 1, end.day + 1, end.hour, end.minute);
+      while (currentDate <= endDate) {
+        formData.dates.push({
+          startAt: currentDate.toISOString(),
+          term: selectDate.term,
+        });
+        currentDate = new Date(currentDate.getTime() + 1000 * 60 * 60 * 24);
+      }
+    } else {
+      formData.dates = selectDate.date.map(date => {
+        const { year, month, day, hour, minute } = date;
+        const isoDate = new Date(year, month - 1, day + 1, hour, minute).toISOString();
+        return {
+          startAt: isoDate,
+          term: selectDate.term,
+        };
+      });
+    }
+    // console.log(formData);
   };
 
   return (
@@ -244,13 +329,14 @@ function WritePost(
             name="title"
             placeholder="제목"
             value={formData.title}
+            maxLength={100}
             darkMode={darkMode}
             onChange={handleInputChange}
           />
           <TextArea
-            name="content"
+            name="context"
             placeholder="글 작성"
-            value={formData.content}
+            value={formData.context}
             onChange={handleInputChange}
           />
           <DatePickerInput
@@ -268,18 +354,31 @@ function WritePost(
             range={isRange}
             name="date"
             placeholder="시작날짜 및 시각"
-            format="MM/DD/YYYY"
+            format="MM/DD/YYYY HH:mm:ss"
             plugins={[
               <TimePicker position="bottom" />,
               <DatePanel markFocused />
             ]}
-            value={formData.date}
+            value={selectDate.date}
             onChange={(value) =>
-              setFormData((prevFormData) => ({
+              setSelectData((prevFormData) => ({
                 ...prevFormData,
                 date: value,
               }))
             }
+            mobileButtons={[
+              {
+                label: "RESET",
+                type: "button",
+                className: "rmdp-button rmdp-action-button",
+                onClick: () => {
+                  setSelectData((prevFormData) => ({
+                    ...prevFormData,
+                    date: [],
+                  }));
+                },
+              }
+            ]}
           />
           <CheckboxLabel>
             <CheckboxInput type="checkbox" onChange={handleCheckboxChange} />
@@ -289,10 +388,11 @@ function WritePost(
             type="term"
             name="term"
             placeholder="기간(분)"
-            value={formData.term}
-            onChange={handleInputChange2}
+            maxLength={20}
+            value={selectDate.term}
+            onChange={handleInputChangeTerm}
           />
-          <Dropdown value={selectedOption} onChange={handleOptionChange}>
+          <Dropdown value={selectedOption} onChange={handleOptionChangeEvent}>
             {options.map((option) => (
               <option key={option} value={option}>
                 {option}
@@ -309,9 +409,10 @@ function WritePost(
           {showLocationInputgaepo && (
             <Input
               type="text"
-              name="location"
+              name="locationName"
               placeholder="장소"
-              value={formData.location}
+              maxLength={100}
+              value={formData.locationName}
               onChange={handleInputChange}
             />
           )}
