@@ -11,7 +11,7 @@ import Props from "../interface/props.interface";
 import { DARK, LIGHT } from "../theme/theme";
 
 // pre-made
-import { SearchEvents } from "../component/searchEvents";
+import { SearchEvents } from "../component/searchEvent2";
 
 // API
 import { getLocations } from "../network/api/axios.custom"

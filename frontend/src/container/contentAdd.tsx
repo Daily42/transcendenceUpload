@@ -1,15 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/no-duplicates */
+/* eslint-disable quote-props */
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable max-len */
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { DARK, LIGHT } from "../theme/theme";
-import ContainerProps from "../interface/containerProps.interface";
+import Props from "../interface/props.interface";
 import "react-multi-date-picker/styles/layouts/mobile.css";
-import placeType from '../enum/placeType.enum';
+import placeType from "../enum/placeType.enum";
+import Idate, { IDateObject} from "../interface/date.interface";
+import Ipost from "../interface/post.interface";
+import PlaceType from "../enum/placeType.enum";
 
 
-const Contents = styled.div<ContainerProps>`
+const Contents = styled.div<Props>`
   height: calc(100% - 50px);
   width: 70%;
   margin-left: 15%;
@@ -33,7 +42,7 @@ const Contents = styled.div<ContainerProps>`
   }
 `;
 
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<Props>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +51,7 @@ const Container = styled.div<ContainerProps>`
   height: 100vh;
 `;
 
-const Card = styled.div<ContainerProps>`
+const Card = styled.div<Props>`
   background-color: ${(props) => (props.darkMode ? DARK.BACKGROUND : LIGHT.BACKGROUND)};
   border-radius: 8px;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.08);
@@ -57,7 +66,7 @@ const Form = styled.form`
   gap: 16px;
 `;
 
-const Input = styled.input<ContainerProps>`
+const Input = styled.input<Props>`
   background-color: ${(props) => (props.darkMode ? LIGHT.FORM : LIGHT.FORM)};
   border: none;
   border-radius: 8px;
@@ -66,7 +75,7 @@ const Input = styled.input<ContainerProps>`
   font-size: 16px;
 `;
 
-const TextArea = styled.textarea<ContainerProps>`
+const TextArea = styled.textarea<Props>`
   background-color: ${(props) => (props.darkMode ? DARK.FORM : LIGHT.FORM)};
   border: none;
   border-radius: 8px;
@@ -76,7 +85,7 @@ const TextArea = styled.textarea<ContainerProps>`
   font-size: 16px;
 `;
 
-const SubmitButton = styled.button<ContainerProps>`
+const SubmitButton = styled.button<Props>`
   background-color: #0070F3;
   border: none;
   border-radius: 8px;
@@ -91,7 +100,7 @@ const SubmitButton = styled.button<ContainerProps>`
   }
 `;
 
-const DatePickerInput = styled(DatePicker)<ContainerProps>`
+const DatePickerInput = styled(DatePicker)<Props>`
   background-color: ${(props) => (props.darkMode ? DARK.FORM : LIGHT.FORM)};
   border: none;
   border-radius: 8px;
@@ -100,7 +109,7 @@ const DatePickerInput = styled(DatePicker)<ContainerProps>`
   font-size: 16px;
 `;
 
-const Heading = styled.h1<ContainerProps>`
+const Heading = styled.h1<Props>`
   color: ${(props) => (props.darkMode ? DARK.TEXT : LIGHT.TEXT)};
   font-size: 32px;
   font-weight: bold;
@@ -108,7 +117,7 @@ const Heading = styled.h1<ContainerProps>`
   text-align: center;
 `;
 
-const Dropdown = styled.select<ContainerProps>`
+const Dropdown = styled.select<Props>`
   background-color: ${(props) => (props.darkMode ? DARK.FORM : LIGHT.FORM)};
   border: none;
   border-radius: 8px;
@@ -141,47 +150,52 @@ function WritePost(
   }
 ) {
   const { darkMode } = props;
-  const [formData, setFormData] = useState({
+  const initialFormData: Ipost = {
     title: "",
     typeId: "1",
     context: "",
-    locationCode: "PL0000",
+    locationCode: PlaceType.PL0000,
     locationName: "",
     dates: [],
-  });
+  };
 
-  const [selectDate, setSelectData] = useState({
-    term: "",
+  const [formData, setFormData] = useState<Ipost>(initialFormData);
+
+  const [selectDate, setSelectDate] = useState<{
+    date: IDateObject[];
+    term: string;
+  }>({
     date: [],
+    term: "",
   });
   const [isRange, setIsRange] = useState(false);
   const [selectedOption, setSelectedOption] = useState("42seoul_official");
   const [selectedOption2, setSelectedOption2] = useState("개포 클러스터");
   const [showLocationInputgaepo, setshowLocationInputgaepo] = useState(true);
 
-// useEffect(() => {
-//   if (selectDate.date.length > 0) {
-//     if (isRange) {
-//       const start = selectDate.date[0];
-//       const end = selectDate.date[1];
-//       let currentDate = new Date(start.year, start.month - 1, start.day + 1, start.hour, start.minute);
-//       const endDate = new Date(end.year, end.month - 1, end.day + 1, end.hour, end.minute);
-//       while (currentDate <= endDate) {
-//         console.log(currentDate.toISOString());
-//         currentDate = new Date(currentDate.getTime() + 1000 * 60 * 60 * 24);
-//       }
-//     } else {
-//       selectDate.date.map(date => {
-//         const { year, month, day, hour, minute } = date;
-//         const isoDate = new Date(year, month - 1, day + 1, hour, minute).toISOString();
-//         console.log(isoDate);
-//       });
-//     }
-//   } else {
-//     console.log("No date selected");
-//   }
-//   console.log(selectDate);
-// }, [selectDate.date, isRange]);
+  // useEffect(() => {
+  //   if (selectDate.date.length > 0) {
+  //     if (isRange) {
+  //       const start = selectDate.date[0];
+  //       const end = selectDate.date[1];
+  //       let currentDate = new Date(start.year, start.month - 1, start.day + 1, start.hour, start.minute);
+  //       const endDate = new Date(end.year, end.month - 1, end.day + 1, end.hour, end.minute);
+  //       while (currentDate <= endDate) {
+  //         console.log(currentDate.toISOString());
+  //         currentDate = new Date(currentDate.getTime() + 1000 * 60 * 60 * 24);
+  //       }
+  //     } else {
+  //       selectDate.date.map(date => {
+  //         const { year, month, day, hour, minute } = date;
+  //         const isoDate = new Date(year, month - 1, day + 1, hour, minute).toISOString();
+  //         console.log(isoDate);
+  //       });
+  //     }
+  //   } else {
+  //     console.log("No date selected");
+  //   }
+  //   console.log(selectDate);
+  // }, [selectDate.date, isRange]);
 
   const options = [
     "42seoul_official",
@@ -191,14 +205,14 @@ function WritePost(
     "etc"
   ];
 
-  const eventTypeMap = {
+  const eventTypeMap: { [key: string]: string } = {
     "42seoul_official": "1",
     "study group": "2",
     "club(동아리)": "3",
     "hackerthon & conference": "4",
     "etc": "5",
   };
-  
+
   const options2 = [
     "개포 클러스터",
     "서초 클러스터",
@@ -220,10 +234,10 @@ function WritePost(
     "개포 클러스터 - 1층 42Lab",
   ];
 
-  const placeTypeMap = {
+  const placeTypeMap: { [key: string] : PlaceType } = {
     "개포 클러스터": placeType.PL0000,
     "서초 클러스터": placeType.PL0100,
-    "기타": placeType.PL0200,
+    "기타 etc": placeType.PL0200,
     "개포 클러스터 - 2층 Cluster 01": placeType.PL0001,
     "개포 클러스터 - 2층 Cluster 02": placeType.PL0002,
     "개포 클러스터 - 4층 Cluster 03": placeType.PL0003,
@@ -240,7 +254,6 @@ function WritePost(
     "개포 클러스터 - 1층 게임장": placeType.PL0014,
     "개포 클러스터 - 1층 42Lab": placeType.PL0015,
   };
-  
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -249,7 +262,7 @@ function WritePost(
       [name]: value,
     }));
   };
-  
+
   const handleOptionChangeEvent = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
@@ -262,7 +275,7 @@ function WritePost(
   const handleInputChangeTerm = (event: any) => {
     const { name, value } = event.target;
     const onlyNumber = value.replace(/[^0-9]/g, "")
-    setSelectData((prevFormData) => ({
+    setSelectDate((prevFormData: any) => ({
       ...prevFormData,
       [name]: onlyNumber,
     }));
@@ -297,26 +310,25 @@ function WritePost(
     if (isRange) {
       const start = selectDate.date[0];
       const end = selectDate.date[1];
-      let currentDate = new Date(start.year, start.month - 1, start.day + 1, start.hour, start.minute);
-      const endDate = new Date(end.year, end.month - 1, end.day + 1, end.hour, end.minute);
+      let currentDate = new Date(start?.year, start?.month - 1, start?.day + 1, start?.hour, start?.minute);
+      const endDate = new Date(end?.year, end?.month - 1, end?.day + 1, end?.hour, end?.minute);
       while (currentDate <= endDate) {
-        formData.dates.push({
+        formData.dates!.push({
           startAt: currentDate.toISOString(),
-          term: selectDate.term,
+          term: parseInt(selectDate.term, 10),
         });
         currentDate = new Date(currentDate.getTime() + 1000 * 60 * 60 * 24);
       }
     } else {
-      formData.dates = selectDate.date.map(date => {
+      formData.dates = selectDate.date.map((date) => {
         const { year, month, day, hour, minute } = date;
         const isoDate = new Date(year, month - 1, day + 1, hour, minute).toISOString();
         return {
           startAt: isoDate,
-          term: selectDate.term,
+          term: parseInt(selectDate.term, 10),
         };
       });
     }
-    // console.log(formData);
   };
 
   return (
@@ -359,9 +371,14 @@ function WritePost(
               <TimePicker position="bottom" />,
               <DatePanel markFocused />
             ]}
-            value={selectDate.date}
-            onChange={(value) =>
-              setSelectData((prevFormData) => ({
+            value={selectDate.date.map(
+              ({ year, month, day, hour, minute }) =>
+                new Date(year, month - 1, day, hour, minute).toLocaleString("en-US", {
+                  timeZone: "UTC",
+                })
+            )}
+            onChange={(value: any) =>
+              setSelectDate((prevFormData) => ({
                 ...prevFormData,
                 date: value,
               }))
@@ -369,10 +386,9 @@ function WritePost(
             mobileButtons={[
               {
                 label: "RESET",
-                type: "button",
                 className: "rmdp-button rmdp-action-button",
                 onClick: () => {
-                  setSelectData((prevFormData) => ({
+                  setSelectDate((prevFormData) => ({
                     ...prevFormData,
                     date: [],
                   }));

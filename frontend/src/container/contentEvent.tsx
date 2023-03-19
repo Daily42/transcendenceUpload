@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 // Enum & Interface
-import Props from "../interface/props.interface";
+import Props from "../interface/props.interface"
 
 // theme
 import { DARK, LIGHT } from "../theme/theme";
@@ -43,7 +43,7 @@ export function ContainerContents(
   props: {
     darkMode: boolean,
     toggleDarkMode: Function
-    eventId: string,
+    eventId: any,
   }
 ) {
   const { darkMode, toggleDarkMode, eventId } = props;

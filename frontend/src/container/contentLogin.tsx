@@ -14,6 +14,7 @@ import { DARK, LIGHT } from "../theme/theme";
 
 // API
 import { getLocations } from "../network/api/axios.custom"
+import { backendSite } from "../network/api/axios.instance";
 
 // import { BuildingName } from "../component/building/buildingName"
 
@@ -59,20 +60,29 @@ const TextContainer = styled.div`
 const Text = styled.pre<Props>`
   width: 100%;
 
+  font-weight: 300;
   font-size: 40px;
-  text-shadow: 5px 5px 3px ${(props) => (props.darkMode ? DARK.TEXT_SHADOW : LIGHT.TEXT_SHADOW)};
+  text-shadow: 6px 6px 5px ${(props) => (props.darkMode ? DARK.TEXT_SHADOW : LIGHT.TEXT_SHADOW)};
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 `;
 
 const LogoContainer = styled.div`
   transition-duration: 1.5s;
-  width: 100%;
+  width: 70%;
 `;
 
 const Logo = styled.img`
   transition-duration: 1.5s;
   width: 70%;
+`;
+
+const LoginButton = styled.div`
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
 `;
 
 export function ContainerContents(
@@ -109,6 +119,10 @@ export function ContainerContents(
         <LogoContainer>
           <Logo src={`../../public/asset/logo/${imgSrc}.svg`} />
         </LogoContainer>
+        <div style={{ width: "100%", height: "10%" }} />
+        <LoginButton>
+          <a href={`${backendSite}/auth/42?redirectUrl=http://localhost:3030`}>42 Login</a>
+        </LoginButton>
       </Wrapper>
     </Contents>
   );

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useParams } from "react-router-dom";
 import { ViewTemplate } from "./viewTemplate";
 
 import { ContainerContents } from "../container/contentEvent";
-import { useParams } from "react-router-dom";
 
 export function Event(
   props: {

@@ -162,7 +162,7 @@ export function SearchEvents(
               <DatePanel markFocused />
             ]}
             value={rangeDate.date}
-            onChange={(value) =>
+            onChange={(value: any) =>
               setRangeDate((prevFormData) => ({
                 ...prevFormData,
                 date: value,

@@ -34,7 +34,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
           <Route path="/add" element={<Add darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
-          <Route path="/event/:eventId" element={<Event darkMode={darkMode} />} />
+          <Route path="/event/:eventId" element={<Event darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
           <Route path="/" element={<Root darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
           <Route path="/*" element={<RootControl />} />
         </Routes>

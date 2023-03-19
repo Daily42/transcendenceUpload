@@ -118,7 +118,7 @@ export function ContainerNavMenu(
         <Title onClick={() => { navigateTo("/") }} darkMode={darkMode}>{title}</Title>
       </ButtonContainer>
       {/* <div onClick={() => { navigateTo("/add") }}>ADD</div> */}
-      <DarkModeButton onClick={toggleDarkMode}>
+      <DarkModeButton onClick={() => { toggleDarkMode() }}>
         {darkMode ? "Turn off" : "Turn on"} Dark Mode
       </DarkModeButton>
     </Container>
