@@ -8,6 +8,7 @@ import Props from "../interface/props.interface"
 
 // theme
 import { DARK, LIGHT } from "../theme/theme";
+import ReactMarkdown from 'react-markdown';
 
 // pre-made
 
@@ -51,6 +52,9 @@ export function ContainerContents(
   return (
     <Contents className="contents" darkMode={darkMode}>
       put your content here
+      <ReactMarkdown>{`# This is a heading
+
+This is some **bold** text.`}</ReactMarkdown>
     </Contents>
   );
 }
