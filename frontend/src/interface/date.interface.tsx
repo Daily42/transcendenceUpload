@@ -1,6 +1,6 @@
-export default interface ITFdate {
+export default interface Idate {
   id: number; // date id seq
-  eventId: number; // event Id from ITFEvent
+  eventId: number; // event Id from IEvent
   startAt: string; // start date
   term: number; // minute
 }

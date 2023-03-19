@@ -1,6 +1,6 @@
 import * as axios from "./axios.instance";
-import ITFevent from "../../interface/event.interface";
-import ITFlocation from "../../interface/location.interface";
+import Ievent from "../../interface/event.interface";
+import Ilocation from "../../interface/location.interface";
 import DateType from "../../enum/eventType.enum";
 import PlaceType from "../../enum/placeType.enum";
 
@@ -13,9 +13,9 @@ export const getEventsList = async () => {
   }
 }
 
-export const searchEvent = async (stt: string, end: string): Promise<ITFevent[]> => {
+export const searchEvent = async (stt: string, end: string): Promise<Ievent[]> => {
   try {
-    const response = await axios.instance.get<ITFevent[]>(`/events?startDate=${stt}&endDate=${end}`);
+    const response = await axios.instance.get<Ievent[]>(`/events?startDate=${stt}&endDate=${end}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -32,9 +32,9 @@ export const getEventType = async () => {
   }
 }
 
-export const getLocations = async (): Promise<ITFlocation[]> => {
+export const getLocations = async (): Promise<Ilocation[]> => {
   try {
-    const response = await axios.instance.get<ITFlocation[]>("/locations");
+    const response = await axios.instance.get<Ilocation[]>("/locations");
     return (response.data);
   } catch (error) {
     console.error(error);
@@ -42,9 +42,9 @@ export const getLocations = async (): Promise<ITFlocation[]> => {
   }
 }
 
-export const getLocation = async (locationId: PlaceType): Promise<ITFlocation[]> => {
+export const getLocation = async (locationId: PlaceType): Promise<Ilocation[]> => {
   try {
-    const response = await axios.instance.get<ITFlocation[]>(`/locations/${locationId}`);
+    const response = await axios.instance.get<Ilocation[]>(`/locations/${locationId}`);
     return (response.data);
   } catch (error) {
     console.error(error);

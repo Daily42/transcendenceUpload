@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 // Enum & Interface
-import ITFlocation from "../interface/location.interface";
+import Ilocation from "../interface/location.interface";
 import Props from "../interface/props.interface";
 
 // theme
@@ -82,7 +82,7 @@ export function ContainerContents(
   }
 ) {
   const { darkMode, toggleDarkMode } = props;
-  const [location, setLocation] = useState<ITFlocation[]>([]);
+  const [location, setLocation] = useState<Ilocation[]>([]);
   let imgSrc;
 
   if (darkMode === true) {

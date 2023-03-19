@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Global, css } from "@emotion/react";
 import { Login } from "./view/viewLogin";
 import { Add } from "./view/viewAdd";
+import { Event } from "./view/viewEvent";
 import { Root } from "./view/viewRoot";
 import { DARK, LIGHT } from "./theme/theme";
 import { RootControl } from "./component/rootControl"
@@ -31,8 +32,9 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route path="/Login" element={<Login darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
-          <Route path="/Add" element={<Add darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+          <Route path="/login" element={<Login darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+          <Route path="/add" element={<Add darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+          <Route path="/event/:eventId" element={<Event darkMode={darkMode} />} />
           <Route path="/" element={<Root darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
           <Route path="/*" element={<RootControl />} />
         </Routes>

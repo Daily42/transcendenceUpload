@@ -4,30 +4,30 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 // Enum & Interface
-import Ilocation from "../interface/location.interface";
 import Props from "../interface/props.interface";
 
 // theme
 import { DARK, LIGHT } from "../theme/theme";
 
 // pre-made
-import { SearchEvents } from "../component/searchEvents";
 
 // API
-import { getLocations } from "../network/api/axios.custom"
 
 // import { BuildingName } from "../component/building/buildingName"
 
 const Contents = styled.div<Props>`
   height: calc(100% - 50px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: left;
   color: ${(props) => (props.darkMode ? DARK.TEXT : LIGHT.TEXT)};
   background-color: ${(props) => (props.darkMode ? DARK.BACKGROUND : LIGHT.BACKGROUND)};
+  padding: 3vh;
   overflow-x: hidden;
   overflow-y: scroll;
+  transition-duration: 1.5s;
   &::-webkit-scrollbar {
     background: none;
     width: 0.6rem;
@@ -43,23 +43,14 @@ export function ContainerContents(
   props: {
     darkMode: boolean,
     toggleDarkMode: Function
+    eventId: string,
   }
 ) {
-  const { darkMode, toggleDarkMode } = props;
-  const [location, setLocation] = useState<Ilocation[]>([]);
-
-  useEffect(() => {
-    getLocations().then((response: any) => {
-      console.log("response: ", response);
-      setLocation(response);
-    });
-  }, []);
+  const { darkMode, toggleDarkMode, eventId } = props;
 
   return (
     <Contents className="contents" darkMode={darkMode}>
-      <SearchEvents
-        darkMode={darkMode}
-      />
+      put your content here
     </Contents>
   );
 }
